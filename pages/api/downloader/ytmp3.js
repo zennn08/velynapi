@@ -26,8 +26,7 @@ export default async function handler(req, res) {
             res.status(200).json({
                 status: true,
                 creator: CREATOR,
-                input: url,
-                output: data.url,
+                data
             });
         } catch (error) {
             console.error("Error:", error);
@@ -65,6 +64,7 @@ class YTDLMP3 {
       `${initURL}&v=${id}&f=mp3&_=${Math.random()}`,
       { headers: this.headers }
     );
+      console.log("Convert", data);
     return data;
   }
 
@@ -76,6 +76,7 @@ class YTDLMP3 {
       if (data.error) throw new Error(data.error);
       progress = data.progress;
       title = data.title;
+        console.log("Progress", data);
     }
     return title;
   }
